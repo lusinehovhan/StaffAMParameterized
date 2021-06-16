@@ -21,23 +21,6 @@ public class DriverWaiter {
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
-    public void visibilityOfElement(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void clickabilityOfElementLoc(By by) {
-
-        wait.until(ExpectedConditions.elementToBeClickable(by));
-    }
-
-    public void clickabilityOfElement(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public void visibilityOfAllElementsLoc(By by) {
-
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
-    }
     public void visibilityOfAllElements(List<WebElement> list) {
 
         wait.until(ExpectedConditions.visibilityOfAllElements(list));
