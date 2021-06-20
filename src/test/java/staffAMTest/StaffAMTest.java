@@ -8,22 +8,12 @@ import org.testng.asserts.SoftAssert;
 import staffAM.SearchJobPage;
 import url_manager.UrlSetter;
 
-public class StaffAMTest {
-    private WebDriver driver;
+public class StaffAMTest extends BaseTest {
     private SearchJobPage searchJobPage;
     private int currentPageNum = 100;
 
-    @BeforeSuite
-    public void chromeSetup() throws InterruptedException {
-        UrlSetter.setUrl();
-    }
-
     @BeforeClass
-    public void setup() throws InterruptedException {
-        DriverSetter.setDriver();
-        driver = DriverSetter.getDriver();
-        driver.manage().window().maximize();
-
+    public void setupSearchPage() throws InterruptedException {
         searchJobPage = new SearchJobPage(driver).open();
         searchJobPage.waitPageLoad();
     }
@@ -49,11 +39,5 @@ public class StaffAMTest {
     @AfterMethod
     public void clearFilters() {
         searchJobPage.clearFilter();
-    }
-
-    @AfterClass
-    public void quitTest() {
-
-        driver.quit();
     }
 }
