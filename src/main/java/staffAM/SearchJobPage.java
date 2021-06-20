@@ -7,10 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class HomePage extends BasePage {
+public class SearchJobPage extends BasePage {
     private String url = "/en/jobs";
-    private DriverWaiter driverWaiter;
-
 
     private List<WebElement> jobResultListElem() {
         By jobResultLoc = By.cssSelector(".list-view [data-key]");
@@ -37,15 +35,12 @@ public class HomePage extends BasePage {
         return driver.findElement(By.xpath(jobsFilterNumLoc));
     }
 
-    public HomePage(WebDriver driver) {
+    public SearchJobPage(WebDriver driver) {
         super(driver);
-        driverWaiter = new DriverWaiter(driver, 30);
     }
-
-    public int actualNumberJobs(String specialist) {
-        jobFilterListElem(specialist).click();
+    public void clickJobFilter(String filter) throws InterruptedException {
+        jobFilterListElem(filter).click();
         driverWaiter.visibilityOfElementLoc(jobResultViewLoc);
-        return jobResultListElem().size();
     }
 
     public int expectedNumberJobs(String specialist) throws InterruptedException {
@@ -62,18 +57,23 @@ public class HomePage extends BasePage {
         return Integer.parseInt(expectedNumSpecialist);
     }
 
+    public int actualNumberJobs() {
+        return jobResultListElem().size();
+    }
+
     public void clearFilter() {
         Actions actions = new Actions(driver);
         actions.moveToElement(clearFiltersElem).perform();
         clearFiltersElem.click();
     }
 
-    public HomePage open() {
+    public SearchJobPage open() {
         driver.get(BASE_URL + url);
         return this;
     }
 
     public void waitPageLoad() {
+
         driverWaiter.visibilityOfAllElements(jobResultListElem());
     }
 }
